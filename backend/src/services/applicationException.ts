@@ -1,0 +1,44 @@
+import {Response} from "express";
+
+class ApplicationException {
+
+  public error: any;
+  public message: string;
+
+  constructor(error: any, message: string) {
+    this.error = error;
+    this.message = message;
+  }
+
+}
+
+const Errors = {
+  BAD_REQUEST: { message: 'BAD_REQUEST', code: 400 },
+  NOT_FOUND: { message: 'NOT_FOUND', code: 404 },
+  FORBIDDEN: { message: 'FORBIDDEN', code: 403 },
+  UNAUTHORIZED: { message: 'UNAUTHORIZED', code: 401 },
+  VALIDATION_FAILURE: { message: 'VALIDATION_FAILURE', code: 406 },
+  METHOD_NOT_ALLOWED: { message: 'METHOD_NOT_ALLOWED', code: 405 },
+  PRECONDITION_FAILED: { message: 'PRECONDITION_FAILED', code: 412 },
+  CONFLICT: { message: 'CONFLICT', code: 409 },
+
+  is: function(error: any, errorCode?: number): boolean {
+    return error instanceof ApplicationException && (errorCode === undefined || error.error === errorCode);
+  },
+
+  new: function(code: number, message: string): ApplicationException {
+    return new ApplicationException(code, message);
+  },
+
+  errorHandler: function(error: any, response: Response): void {
+    if (error instanceof ApplicationException) {
+      response.status(error.error.code).send(error.message || error.error.message);
+    } else {
+      console.error(error && error.stack || error);
+      response.sendStatus(500);
+    }
+  }
+};
+
+export default Errors;
+
