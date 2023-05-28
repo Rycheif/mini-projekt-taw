@@ -33,8 +33,8 @@ function StartServer() {
     router.use(express.json());
     router.use(cors());
 
-    router.get('/ping', (req, res, next) =>
-        res.status(200).json({message: 'pong'}));
+    router.get('/test', (req, res, next) =>
+        res.status(200).json({message: 'Server works'}));
 
     router.use((req, res, next) => {
         const error = new Error('Not Found');

@@ -1,6 +1,6 @@
 import User, {IUser} from "../models/User";
 import * as _ from "lodash";
-import applicationException from "./applicationException";
+import applicationException from "../../util/applicationException";
 
 function createNewOrUpdate(user: IUser) {
     return Promise.resolve().then(() => {
