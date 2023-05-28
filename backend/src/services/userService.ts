@@ -39,7 +39,7 @@ async function getById(id: string) {
 }
 
 function removeById(id: string) {
-    return User.findByIdAndRemove(id);
+    return User.deleteOne({_id: id});
 }
 
 export default {

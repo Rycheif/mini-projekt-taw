@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 import express from "express";
 import cors from "cors";
 import * as http from "http";
-import passwordService from "./services/passwordService";
 
 const router = express();
 
@@ -11,14 +10,6 @@ mongoose.connect(config.mongo.url, {retryWrites: true, w: 'majority'})
     .then(() => {
         console.info('Connected to MongoDB');
         StartServer();
-        passwordService.authorize({
-            userId: '6471f8e07675a368fe941b85',
-            password: "123sqwe"
-        }).then(() => {
-            console.log('Poszło');
-        }).catch(reason => {
-            console.error(reason);
-        })
     })
     .catch((error) => {
         console.error('Unable to connect to MongoDB');
