@@ -21,6 +21,7 @@ const Errors = {
   METHOD_NOT_ALLOWED: { message: 'METHOD_NOT_ALLOWED', code: 405 },
   PRECONDITION_FAILED: { message: 'PRECONDITION_FAILED', code: 412 },
   CONFLICT: { message: 'CONFLICT', code: 409 },
+  INTERNAL_SERVER_ERROR: { message: 'INTERNAL_SERVER_ERROR', code: 500 },
 
   is: function(error: any, errorCode?: number): boolean {
     return error instanceof ApplicationException && (errorCode === undefined || error.error === errorCode);
