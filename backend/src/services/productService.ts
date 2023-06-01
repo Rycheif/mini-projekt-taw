@@ -24,7 +24,7 @@ function createNewOrUpdate(product: IProduct) {
         });
 }
 
-async function getAll(page: number, limit: number) {
+async function getPage(page: number, limit: number) {
     let result = await Product.find({})
         .limit(limit)
         .skip((page - 1) * limit);
@@ -72,6 +72,6 @@ export default {
     getByName,
     getByManufacturer,
     getById,
-    getAll,
+    getPage,
     removeById
 }
