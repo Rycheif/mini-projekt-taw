@@ -87,7 +87,6 @@ async function authenticate(userToAuthenticate: IAuthUser) {
     return getToken(token);
 }
 
-
 function getToken(token: IToken) {
     return {token: token.value};
 }

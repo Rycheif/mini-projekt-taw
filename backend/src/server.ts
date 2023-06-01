@@ -2,6 +2,7 @@ import {config} from "./config/config";
 import mongoose from "mongoose";
 import express from "express";
 import cors from "cors";
+import userRoutes from "./routes/User";
 import * as http from "http";
 
 const router = express();
@@ -32,6 +33,8 @@ function StartServer() {
     router.use(express.urlencoded({extended: true}));
     router.use(express.json());
     router.use(cors());
+
+    router.use("/api/user", userRoutes);
 
     router.get('/test', (req, res, next) =>
         res.status(200).json({message: 'Server works'}));
