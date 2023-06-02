@@ -10,7 +10,7 @@ router.post("/", async (req, res, next) => {
     try {
         const data = req.body as IProduct;
         const result = await productService.createNewOrUpdate(data);
-        res.status(201).json(result).send();
+        res.status(201).json(result);
     } catch (e) {
         console.error(e);
         applicationException.errorHandler(e, res);
@@ -21,7 +21,7 @@ router.get("/:productId", async (req, res, next) => {
     try {
         const id = req.params.productId;
         const result = await productService.getById(id);
-        res.status(200).json(result).send();
+        res.status(200).json(result);
     } catch (e) {
         console.error(e);
         applicationException.errorHandler(e, res);

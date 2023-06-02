@@ -20,7 +20,7 @@ router.post("/auth", async (req, res, next) => {
     try {
         const data = req.body as IAuthUser;
         const token = await userService.authenticate(data);
-        res.status(200).json(token).send();
+        res.status(200).json(token);
     } catch (e) {
         console.error(e);
         applicationException.errorHandler(e, res);
@@ -31,7 +31,7 @@ router.get("/", async (req, res, next) => {
     try {
         const user = req.query.user as string;
         const result = await userService.getByEmailOrLogin(user);
-        res.status(200).json(result).send();
+        res.status(200).json(result);
     } catch (e) {
         console.error(e);
         applicationException.errorHandler(e, res);
@@ -42,7 +42,7 @@ router.get("/:userId", async (req, res, next) => {
     try {
         const user = req.params.userId;
         const result = await userService.getById(user);
-        res.status(200).json(result).send();
+        res.status(200).json(result);
     } catch (e) {
         console.error(e);
         applicationException.errorHandler(e, res);
@@ -53,7 +53,7 @@ router.delete("/:userId", async (req, res, next) => {
     try {
         const user = req.params.userId;
         const result = await userService.removeById(user);
-        res.status(204).json(result).send();
+        res.status(204).json(result);
     } catch (e) {
         console.error(e);
         applicationException.errorHandler(e, res);
