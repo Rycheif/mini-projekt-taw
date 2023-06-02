@@ -27,7 +27,7 @@ export class ProductService {
   }
 
   getPageOfProducts(page: number, limit: number) {
-    return this.http.get<IProductPage[]>(config.baseUrl + config.products + `?page=${page}&limit=${limit}`);
+    return this.http.get<IProductPage>(config.baseUrl + config.products + `?page=${page}&limit=${limit}`);
   }
 
   deleteProduct(productId: string) {

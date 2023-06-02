@@ -9,7 +9,7 @@ export interface IProduct {
 }
 
 export interface IProductPage {
-  products: IProduct[],
+  result: IProduct[],
   totalPages: number;
   currentPage: number;
 }

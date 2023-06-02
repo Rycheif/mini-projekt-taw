@@ -9,13 +9,19 @@ import {NavbarComponent} from './shared/navbar/navbar.component';
 import {NgOptimizedImage} from "@angular/common";
 import {HttpClientModule} from "@angular/common/http";
 import {ProductsComponent} from './components/products/products.component';
+import {ProductItemComponent} from './components/product-item/product-item.component';
+import {ProductImageComponent} from './components/product-image/product-image.component';
+import {ProductTextComponent} from './components/product-text/product-text.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    ProductsComponent
+    ProductsComponent,
+    ProductItemComponent,
+    ProductImageComponent,
+    ProductTextComponent
   ],
     imports: [
         BrowserModule,

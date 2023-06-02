@@ -1,1 +1,13 @@
-<p>products works!</p>
+<div class="row mt-2">
+  <div *ngFor="let product of products$.result" class="grid col">
+      <product-item
+        [id]="product.id || ''"
+        [manufacturer]="product.manufacturer"
+        [productName]="product.name"
+        [image]="product.image"
+        [price]="product.price"
+        [currency]="product.currency || 'USD'"
+      >
+      </product-item>
+  </div>
+</div>

@@ -42,7 +42,7 @@ router.get("/", async (req, res, next) => {
         } else {
             result = await productService.getPage(Number(page), Number(limit));
         }
-        res.status(200).json(result).send();
+        res.status(200).json(result);
     } catch (e) {
         console.error(e);
         applicationException.errorHandler(e, res);
