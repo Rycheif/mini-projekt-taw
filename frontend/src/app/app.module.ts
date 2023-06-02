@@ -1,24 +1,28 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HomeComponent } from './components/home/home.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {HomeComponent} from './components/home/home.component';
+import {NavbarComponent} from './shared/navbar/navbar.component';
 import {NgOptimizedImage} from "@angular/common";
+import {HttpClientModule} from "@angular/common/http";
+import {ProductsComponent} from './components/products/products.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    ProductsComponent
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         NgbModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+        HttpClientModule
     ],
   providers: [],
   bootstrap: [AppComponent]
