@@ -32,24 +32,16 @@ router.get("/", async (req, res, next) => {
     try {
         const name = req.query.name as string;
         const manufacturer = req.query.manufacturer as string;
+        const page = req.query.page as string;
+        const limit = req.query.limit as string;
         let result;
         if (name) {
             result = await productService.getByName(name);
-        } else {
+        } else if (manufacturer) {
             result = await productService.getByManufacturer(manufacturer);
+        } else {
+            result = await productService.getPage(Number(page), Number(limit));
         }
-        res.status(200).json(result).send();
-    } catch (e) {
-        console.error(e);
-        applicationException.errorHandler(e, res);
-    }
-});
-
-router.get("/", async (req, res, next) => {
-    try {
-        const page = req.query.page as string;
-        const limit = req.query.limit as string;
-        const result = await productService.getPage(Number(page), Number(limit));
         res.status(200).json(result).send();
     } catch (e) {
         console.error(e);
