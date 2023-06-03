@@ -33,9 +33,9 @@ const Errors = {
 
   errorHandler: function(error: any, response: Response): void {
     if (error instanceof ApplicationException) {
-      response.status(error.error.code).send(error.message || error.error.message);
+      console.log(JSON.stringify(error, null, 4));
+      response.status(error.error).send(error.message || error.error.message);
     } else {
-      console.error(error && error.stack || error);
       response.sendStatus(500);
     }
   }

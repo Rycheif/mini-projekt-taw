@@ -5,10 +5,10 @@ import applicationException from "../../util/applicationException";
 
 const router = express.Router();
 
-router.post("/", (req, res, next) => {
+router.post("/", async (req, res, next) => {
     try {
         const data = req.body as ICreateOrUpdateUser;
-        userService.createNewOrUpdate(data);
+        await userService.createNewOrUpdate(data);
         res.status(201).send();
     } catch (e) {
         console.error(e);
@@ -60,10 +60,10 @@ router.delete("/:userId", async (req, res, next) => {
     }
 });
 
-router.delete("/logout/:userId", (req, res, next) => {
+router.delete("/logout/:userId", async (req, res, next) => {
     try {
         const user = req.params.userId;
-        userService.removeHashSession(user);
+        await userService.removeHashSession(user);
         res.status(200).send();
     } catch (e) {
         console.error(e);

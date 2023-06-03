@@ -12,6 +12,7 @@ export interface ICreateOrUpdateUser {
     email: string;
     login: string;
     password: string;
+    reEnteredPassword: string;
 }
 
 export interface IAuthUser {
@@ -20,6 +21,7 @@ export interface IAuthUser {
 }
 
 async function createNewOrUpdate(userData: ICreateOrUpdateUser) {
+    validateUserRegistrationData(userData);
     const user = await saveUser(userData);
     if (!user) {
         throw applicationException.new(applicationException.NOT_FOUND.code, "User was not found");
@@ -30,6 +32,32 @@ async function createNewOrUpdate(userData: ICreateOrUpdateUser) {
     };
     await passwordService.createOrUpdate(userPassword);
     return user;
+}
+
+function validateUserRegistrationData(userData: ICreateOrUpdateUser) {
+    let key: keyof ICreateOrUpdateUser;
+    for (key in userData) {
+        if (!userData[key]) {
+            throw applicationException.new(applicationException.BAD_REQUEST.code, `${key} not present`);
+        }
+    }
+
+    const {login, email, password, reEnteredPassword} = userData;
+    if (login.length < 4) {
+        throw applicationException.new(applicationException.BAD_REQUEST.code, `Incorrect login format`);
+    }
+
+    if (email.length === 0) {
+        throw applicationException.new(applicationException.BAD_REQUEST.code, `Incorrect email format`);
+    }
+
+    if (password.length < 5 || reEnteredPassword.length === 0) {
+        throw applicationException.new(applicationException.BAD_REQUEST.code, `Incorrect password format`);
+    }
+
+    if (password !== reEnteredPassword) {
+        throw applicationException.new(applicationException.BAD_REQUEST.code, `Passwords are not the same`);
+    }
 }
 
 function saveUser(user: ICreateOrUpdateUser) {
@@ -73,6 +101,7 @@ function removeById(id: string) {
 }
 
 async function authenticate(userToAuthenticate: IAuthUser) {
+    validateAuthData(userToAuthenticate);
     const user = await getByEmailOrLogin(userToAuthenticate.loginOrEmail);
     if (!user) {
         throw applicationException.new(applicationException.UNAUTHORIZED.code, 'User with that email does not exist');
@@ -85,6 +114,15 @@ async function authenticate(userToAuthenticate: IAuthUser) {
     await passwordService.authorize(userPassword);
     const token = await tokenService.create(userData.id);
     return getToken(token);
+}
+
+function validateAuthData(userToAuthenticate: IAuthUser) {
+    let key: keyof IAuthUser;
+    for (key in userToAuthenticate) {
+        if (!userToAuthenticate[key] || userToAuthenticate[key].length == 0) {
+            throw applicationException.new(applicationException.BAD_REQUEST.code, `${key} not present`);
+        }
+    }
 }
 
 function getToken(token: IToken) {
