@@ -12,6 +12,8 @@ import {ProductsComponent} from './components/products/products.component';
 import {ProductItemComponent} from './components/product-item/product-item.component';
 import {ProductImageComponent} from './components/product-image/product-image.component';
 import {ProductTextComponent} from './components/product-text/product-text.component';
+import {RegistrationComponent} from './components/registration/registration.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -21,16 +23,19 @@ import {ProductTextComponent} from './components/product-text/product-text.compo
     ProductsComponent,
     ProductItemComponent,
     ProductImageComponent,
-    ProductTextComponent
+    ProductTextComponent,
+    RegistrationComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        NgbModule,
-        NgOptimizedImage,
-        HttpClientModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NgbModule,
+    NgOptimizedImage,
+    HttpClientModule,
+    ReactiveFormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

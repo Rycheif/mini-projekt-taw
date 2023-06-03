@@ -11,7 +11,7 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   createNewOrUpdate(data: IProduct) {
-    this.http.post<IProduct>(config.baseUrl, data);
+    this.http.post<IProduct>(config.baseUrl + config.products, data);
   }
 
   getProductById(productId: string) {
