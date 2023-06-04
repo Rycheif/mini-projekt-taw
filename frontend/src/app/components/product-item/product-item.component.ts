@@ -10,6 +10,7 @@ export class ProductItemComponent {
   @Input() manufacturer: string = 'Acme Corporation';
   @Input() productName: string = 'Anvil';
   @Input() price: number = 0;
+  @Input() quantity: number = 0;
   @Input() currency: string = 'USD';
-  @Input() image: string = 'assets/placeholder.jpg';
+  @Input() image: string = 'assets/placeholder.png';
 }

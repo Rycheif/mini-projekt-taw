@@ -14,6 +14,7 @@ import {ProductImageComponent} from './components/product-image/product-image.co
 import {ProductTextComponent} from './components/product-text/product-text.component';
 import {RegistrationComponent} from './components/registration/registration.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {ProductButtonsComponent} from './components/product-buttons/product-buttons.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     ProductItemComponent,
     ProductImageComponent,
     ProductTextComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    ProductButtonsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-<div class="card my-2" style="width: 18rem;">
+<div class="card my-2 shadow product-item" style="width: 18rem;">
   <product-image [image]="image"></product-image>
   <div class="card-body">
     <product-text
@@ -6,7 +6,9 @@
       [manufacturer]="manufacturer"
       [productName]="productName"
       [price]="price"
+      [quantity]="quantity"
       [currency]="currency"
     ></product-text>
+    <product-buttons></product-buttons>
   </div>
 </div>

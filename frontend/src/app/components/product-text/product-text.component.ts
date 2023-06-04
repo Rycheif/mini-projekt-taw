@@ -11,6 +11,7 @@ export class ProductTextComponent {
   @Input() manufacturer: string = 'Acme Corporation';
   @Input() productName: string = 'Anvil';
   @Input() price: number = 0;
+  @Input() quantity: number = 0;
   @Input() currency: string = 'USD';
 
 }

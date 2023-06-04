@@ -1,0 +1,7 @@
+.product-item {
+  transition: transform .3s;
+}
+
+.product-item:hover {
+  transform: scale(1.05);
+}

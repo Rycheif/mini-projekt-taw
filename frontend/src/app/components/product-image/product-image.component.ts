@@ -7,6 +7,6 @@ import {Component, Input} from '@angular/core';
 })
 export class ProductImageComponent {
 
-  @Input() image: string  = "assets/placeholder.jpg";
+  @Input() image: string  = "assets/placeholder.png";
 
 }

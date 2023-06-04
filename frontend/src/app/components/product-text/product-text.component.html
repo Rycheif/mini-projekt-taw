@@ -1,3 +1,8 @@
-<p>{{manufacturer}}</p>
-<p>{{productName}}</p>
-<p>{{price}} {{currency}}</p>
+<div class="">
+  <p class="text-center">{{manufacturer}} {{productName}}</p>
+  <div class="d-flex justify-content-between">
+    <p>Left: {{quantity > 0 ? quantity : 'Out of stock'}}</p>
+    <p><span class="fw-bold">Price: </span>{{price}} {{currency}}</p>
+  </div>
+</div>
+
