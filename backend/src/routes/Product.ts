@@ -2,11 +2,12 @@ import express from "express";
 import applicationException from "../../util/applicationException";
 import {IProduct} from "../models/Product";
 import productService from "../services/productService";
+import admin from "../middleware/admin";
 
 
 const router = express.Router();
 
-router.post("/", async (req, res, next) => {
+router.post("/", admin, async (req, res, next) => {
     try {
         const data = req.body as IProduct;
         const result = await productService.createNewOrUpdate(data);
@@ -49,10 +50,10 @@ router.get("/", async (req, res, next) => {
     }
 });
 
-router.delete("/delete/:productId", (req, res, next) => {
+router.delete("/delete/:productId", admin, (req, res, next) => {
     try {
         const id = req.params.productId;
-         productService.removeById(id);
+        productService.removeById(id);
         res.status(204).send();
     } catch (e) {
         console.error(e);

@@ -2,12 +2,17 @@ import jwt from 'jsonwebtoken';
 import {config} from "../config/config";
 import Token from "../models/Token";
 import applicationException from "../../util/applicationException";
+import userService from "./userService";
 
 async function create(userId: string) {
-    const userData = {userId: userId};
+    const isAdmin = await userService.isUserAdmin(userId);
+    const payload = {
+        userId: userId,
+        isAdmin: isAdmin
+    };
     const {secret, expiresIn} = config.jwt;
     const value = jwt.sign(
-        userData,
+        payload,
         secret,
         {expiresIn: expiresIn});
     const result = await new Token({

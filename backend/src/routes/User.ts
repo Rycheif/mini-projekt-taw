@@ -1,6 +1,8 @@
 import express from "express";
 import userService, {IAuthUser, ICreateOrUpdateUser} from "../services/userService";
 import applicationException from "../../util/applicationException";
+import admin from "../middleware/admin";
+import auth from "../middleware/auth";
 
 
 const router = express.Router();
@@ -49,7 +51,7 @@ router.get("/:userId", async (req, res, next) => {
     }
 });
 
-router.delete("/:userId", async (req, res, next) => {
+router.delete("/:userId", admin, async (req, res, next) => {
     try {
         const user = req.params.userId;
         const result = await userService.removeById(user);
@@ -60,7 +62,7 @@ router.delete("/:userId", async (req, res, next) => {
     }
 });
 
-router.delete("/logout/:userId", async (req, res, next) => {
+router.delete("/logout/:userId", auth, async (req, res, next) => {
     try {
         const user = req.params.userId;
         await userService.removeHashSession(user);

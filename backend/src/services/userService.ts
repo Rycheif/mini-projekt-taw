@@ -133,11 +133,17 @@ async function removeHashSession(userId: string) {
     return await tokenService.remove(userId);
 }
 
+async function isUserAdmin(userId: string) {
+    const result = await User.findOne({isAdmin: true});
+    return !!result;
+}
+
 export default {
     createNewOrUpdate,
     getByEmailOrLogin,
     getById,
     removeById,
     authenticate,
-    removeHashSession
+    removeHashSession,
+    isUserAdmin
 };
