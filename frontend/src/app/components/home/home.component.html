@@ -4,7 +4,10 @@
   <div class="d-flex justify-content-center">
     <img class="my-4" ngSrc="assets/mean.png" alt="MEAN stack" width="561" height="200"/>
   </div>
-    <p>Przejdź do <a [routerLink]="['/products']">aplikacji</a>, <a [routerLink]="['/login']">zaloguj się</a> lub
-      <a [routerLink]="['/register']">zarejestruj</a>.
-    </p>
+  <p>Przejdź do <a [routerLink]="['/products']"
+                   [queryParams]="{ page: 1, limit: 20 }">
+    aplikacji</a>,
+    <a [routerLink]="['/login']">zaloguj się</a> lub
+    <a [routerLink]="['/register']">zarejestruj</a>.
+  </p>
 </div>

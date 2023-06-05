@@ -9,6 +9,7 @@ export interface IProduct {
 }
 
 export interface IProductPage {
+  count: number;
   result: IProduct[],
   totalPages: number;
   currentPage: number;

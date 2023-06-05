@@ -26,7 +26,7 @@ import {ProductButtonsComponent} from './components/product-buttons/product-butt
     ProductImageComponent,
     ProductTextComponent,
     RegistrationComponent,
-    ProductButtonsComponent
+    ProductButtonsComponent,
   ],
   imports: [
     BrowserModule,
