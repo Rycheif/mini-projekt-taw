@@ -33,6 +33,7 @@ async function getPage(page: number, limit: number) {
         throw applicationException.new(applicationException.NOT_FOUND.code, 'No products found');
     }
     return {
+        count,
         result,
         totalPages: Math.ceil(count / limit),
         currentPage: page,
