@@ -15,6 +15,8 @@ import {ProductTextComponent} from './components/product-text/product-text.compo
 import {RegistrationComponent} from './components/registration/registration.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {ProductButtonsComponent} from './components/product-buttons/product-buttons.component';
+import {LoginComponent} from './components/login/login.component';
+import {LogoutComponent} from './components/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import {ProductButtonsComponent} from './components/product-buttons/product-butt
     ProductTextComponent,
     RegistrationComponent,
     ProductButtonsComponent,
+    LoginComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,

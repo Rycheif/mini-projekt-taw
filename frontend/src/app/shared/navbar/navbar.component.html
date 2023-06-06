@@ -11,17 +11,27 @@
             <a class="nav-link" [routerLink]="'/products'" [queryParams]="{ page: 1, limit: 20 }"
                (click)="isMenuCollapsed = true">Products</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="'/add-product'" (click)="isMenuCollapsed = true">Add Product</a>
-          </li>
+          <div *ngIf="isAdmin()">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="'/add-product'" (click)="isMenuCollapsed = true">Add Product</a>
+            </li>
+          </div>
         </ul>
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="'/login'" (click)="isMenuCollapsed = true">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="'/register'" (click)="isMenuCollapsed = true">Register</a>
-          </li>
+          <div *ngIf="isUserLoggedIn(); then thenBlock else elseBlock"></div>
+          <ng-template #thenBlock>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="'/logout'" (click)="isMenuCollapsed = true">Logout</a>
+            </li>
+          </ng-template>
+          <ng-template #elseBlock>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="'/login'" (click)="isMenuCollapsed = true">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="'/register'" (click)="isMenuCollapsed = true">Register</a>
+            </li>
+          </ng-template>
         </ul>
       </div>
     </div>
