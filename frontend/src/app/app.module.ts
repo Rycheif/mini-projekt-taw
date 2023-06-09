@@ -17,6 +17,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {ProductButtonsComponent} from './components/product-buttons/product-buttons.component';
 import {LoginComponent} from './components/login/login.component';
 import {LogoutComponent} from './components/logout/logout.component';
+import {InvalidFormDirective} from './directives/invalid-form.directive';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {LogoutComponent} from './components/logout/logout.component';
     ProductButtonsComponent,
     LoginComponent,
     LogoutComponent,
+    InvalidFormDirective,
   ],
   imports: [
     BrowserModule,

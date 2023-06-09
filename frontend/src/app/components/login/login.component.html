@@ -1,17 +1,26 @@
 <div class="container">
-  <form autocomplete="off" method="POST" [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+  <h1 class="entry-title"><span>Login</span></h1>
+  <hr>
+  <form autocomplete="off" method="POST" [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)"
+        invalidForm [form]="loginForm"
+        [messageTemplate]="errorMessage">
     <div class="input-group">
+      <label class="control-label col-sm-3">Login <span class="text-danger">*</span></label>
       <input type="text" class="form-control"
              formControlName="loginOrEmail" placeholder="Login" title="Login">
     </div>
 
-    <div class="input-group">
+    <div class="input-group mt-4">
+      <label class="control-label col-sm-3">Password <span class="text-danger">*</span></label>
       <input type="password" class="form-control"
              formControlName="password" placeholder="Password" title="Password">
     </div>
 
-    <button class="btn btn-primary" type="submit" title="Login button">
+    <button class="btn btn-primary mt-4" type="submit" title="Login button">
       Login
     </button>
+    <ng-template #errorMessage>
+      <p class="alert alert-danger mt-4">Some fields are not filled correctly.</p>
+    </ng-template>
   </form>
 </div>
