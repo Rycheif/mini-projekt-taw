@@ -2,7 +2,7 @@
   <div *ngFor="let product of products$.result" class="grid col">
     <product-item
       class="d-flex justify-content-center"
-      [id]="product.id || ''"
+      [id]="product._id || '0'"
       [manufacturer]="product.manufacturer"
       [productName]="product.name"
       [image]="product.image || 'assets/placeholder.png'"

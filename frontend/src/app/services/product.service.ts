@@ -1,14 +1,16 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {IProduct, IProductPage} from "../models/Product";
 import {config} from "../config/config";
+import {AuthService} from "./auth.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) {
+  }
 
   createNewOrUpdate(data: IProduct) {
     this.http.post<IProduct>(config.baseUrl + config.products, data).subscribe();
@@ -31,7 +33,15 @@ export class ProductService {
   }
 
   deleteProduct(productId: string) {
-    this.http.delete(config.baseUrl + config.products + `/delete/${productId}`);
+    const token = this.authService.getToken();
+    if (!token) {
+      return;
+    }
+    this.http.delete(config.baseUrl + config.products + `/delete/${productId}`, {
+      headers: new HttpHeaders({
+        'Authorization': token
+      })
+    }).subscribe();
   }
 
 }

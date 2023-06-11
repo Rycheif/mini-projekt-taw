@@ -6,6 +6,7 @@ import {RegistrationComponent} from "./components/registration/registration.comp
 import {LoginComponent} from "./components/login/login.component";
 import {LogoutComponent} from "./components/logout/logout.component";
 import {canActivate} from "./services/auth.guard";
+import {ProductDetailsComponent} from "./components/product-details/product-details.component";
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: 'products',
     component: ProductsComponent,
+  },
+  {
+    path: 'products/details/:productId',
+    component: ProductDetailsComponent,
   },
   {
     path: 'register',

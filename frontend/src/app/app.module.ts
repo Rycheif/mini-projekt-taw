@@ -18,6 +18,7 @@ import {ProductButtonsComponent} from './components/product-buttons/product-butt
 import {LoginComponent} from './components/login/login.component';
 import {LogoutComponent} from './components/logout/logout.component';
 import {InvalidFormDirective} from './directives/invalid-form.directive';
+import {ProductDetailsComponent} from './components/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {InvalidFormDirective} from './directives/invalid-form.directive';
     LoginComponent,
     LogoutComponent,
     InvalidFormDirective,
+    ProductDetailsComponent,
   ],
   imports: [
     BrowserModule,

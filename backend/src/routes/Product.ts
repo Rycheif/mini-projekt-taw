@@ -50,10 +50,10 @@ router.get("/", async (req, res, next) => {
     }
 });
 
-router.delete("/delete/:productId", admin, (req, res, next) => {
+router.delete("/delete/:productId", admin, async (req, res, next) => {
     try {
         const id = req.params.productId;
-        productService.removeById(id);
+        await productService.removeById(id);
         res.status(204).send();
     } catch (e) {
         console.error(e);
