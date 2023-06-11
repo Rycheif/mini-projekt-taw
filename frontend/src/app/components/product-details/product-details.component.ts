@@ -17,6 +17,7 @@ export class ProductDetailsComponent implements OnInit {
   quantity: number = 0;
   currency?: string = 'USD';
   image: string = 'assets/placeholder.png';
+  description: string = 'No description';
 
   closeResult = '';
   showSpinner: boolean = false;
@@ -33,14 +34,13 @@ export class ProductDetailsComponent implements OnInit {
     this.getIdFromUrl()
     this.productService.getProductById(this.id)
       .subscribe(result => {
-        this.manufacturer = result.manufacturer;
-        this.productName = result.name;
-        this.price = result.price;
-        this.quantity = result.quantity;
-        this.currency = result.currency;
-        if (result.image && result.image.length !== 0) {
-          this.image = result.image;
-        }
+        this.manufacturer = result.manufacturer ?? this.manufacturer;
+        this.productName = result.name ?? this.productName;
+        this.price = result.price ?? this.price;
+        this.quantity = result.quantity ?? this.quantity;
+        this.currency = result.currency ?? this.currency;
+        this.image = result.image ?? this.image;
+        this.description = result.description ?? this.description;
       });
   }
 

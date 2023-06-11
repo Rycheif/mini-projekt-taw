@@ -16,6 +16,7 @@ export interface IProduct {
     price: number;
     currency?: string;
     quantity: number;
+    description: string;
 }
 
 export interface IProductModel {
@@ -29,6 +30,7 @@ export const ProductSchema: Schema = new Schema({
     price: {type: Number, required: true, unique: false, default: 0.0},
     currency: {type: String, required: true, unique: false, default: availableCurrency.usd, enum: availableCurrencies},
     quantity: {type: Number, required: true, unique: false, default: 0},
+    description: {type: String, required: true, unique: false},
 });
 
 export default mongoose.model<IProductModel>('product', ProductSchema);

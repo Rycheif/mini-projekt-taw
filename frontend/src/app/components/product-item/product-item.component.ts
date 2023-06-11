@@ -13,4 +13,5 @@ export class ProductItemComponent {
   @Input() quantity: number = 0;
   @Input() currency: string = 'USD';
   @Input() image: string = 'assets/placeholder.png';
+  @Input() description: string = 'No description';
 }

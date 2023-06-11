@@ -6,6 +6,7 @@ export interface IProduct {
   price: number;
   currency?: string;
   quantity: number;
+  description: string;
 }
 
 export interface IProductPage {
