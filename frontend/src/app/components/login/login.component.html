@@ -16,7 +16,7 @@
              formControlName="password" placeholder="Password" title="Password">
     </div>
 
-    <button class="btn btn-primary mt-4" type="submit" title="Login button">
+    <button class="btn btn-primary mt-4" type="submit" title="Login button" [disabled]="loginForm.invalid">
       Login
     </button>
     <ng-template #errorMessage>

@@ -32,6 +32,7 @@ export class RegistrationComponent {
   createOrUpdate(data: ICreateOrUpdateUser) {
     this.authService.createOrUpdate(data);
     this.registrationForm.reset();
+    this.router.navigate(['/']);
   }
 
   private controlsNames() {
