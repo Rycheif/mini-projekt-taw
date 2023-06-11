@@ -7,6 +7,8 @@ import {LoginComponent} from "./components/login/login.component";
 import {LogoutComponent} from "./components/logout/logout.component";
 import {canActivate} from "./services/auth.guard";
 import {ProductDetailsComponent} from "./components/product-details/product-details.component";
+import {AddProductComponent} from "./components/add-product/add-product.component";
+import {canAdminActivate} from "./services/admin-auth.guard";
 
 const routes: Routes = [
   {
@@ -20,6 +22,11 @@ const routes: Routes = [
   {
     path: 'products/details/:productId',
     component: ProductDetailsComponent,
+  },
+  {
+    path: 'products/add',
+    component: AddProductComponent,
+    canActivate: [canAdminActivate]
   },
   {
     path: 'register',

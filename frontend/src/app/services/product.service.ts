@@ -12,8 +12,15 @@ export class ProductService {
   constructor(private http: HttpClient, private authService: AuthService) {
   }
 
-  createNewOrUpdate(data: IProduct) {
-    this.http.post<IProduct>(config.baseUrl + config.products, data).subscribe();
+  createNewOrUpdate(data: IProduct) {const token = this.authService.getToken();
+    if (!token) {
+      return;
+    }
+    this.http.post<IProduct>(config.baseUrl + config.products, data, {
+      headers: new HttpHeaders({
+        'Authorization': token
+      })
+    }).subscribe();
   }
 
   getProductById(productId: string) {
