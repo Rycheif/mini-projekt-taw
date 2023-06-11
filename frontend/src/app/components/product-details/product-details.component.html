@@ -1,5 +1,5 @@
 <article class="d-flex flex-column align-content-center">
-  <div class="d-flex justify-content-end mb-5">
+  <div class="d-flex justify-content-end mb-5" *ngIf="isAdmin()">
     <button type="button" class="btn btn-primary mx-1">Update</button>
     <button type="button" class="btn btn-danger mx-1" (click)="openDeleteModal(content)">Delete</button>
     <ng-template #content let-modal>

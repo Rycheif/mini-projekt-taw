@@ -4,10 +4,19 @@
   <div class="d-flex justify-content-center">
     <img class="my-4" ngSrc="assets/mean.png" alt="MEAN stack" width="561" height="200"/>
   </div>
-  <p>Przejdź do <a [routerLink]="['/products']"
-                   [queryParams]="{ page: 1, limit: 20 }">
-    aplikacji</a>,
-    <a [routerLink]="['/login']">zaloguj się</a> lub
-    <a [routerLink]="['/register']">zarejestruj</a>.
-  </p>
+  <div *ngIf="isLoggedIn(); then thenBlock else elseBlock"></div>
+  <ng-template #thenBlock>
+    <p>Przejdź do <a [routerLink]="['/products']"
+                     [queryParams]="{ page: 1, limit: 20 }">
+      aplikacji</a>.
+    </p>
+  </ng-template>
+  <ng-template #elseBlock>
+    <p>Przejdź do <a [routerLink]="['/products']"
+                     [queryParams]="{ page: 1, limit: 20 }">
+      aplikacji</a>,
+      <a [routerLink]="['/login']">zaloguj się</a> lub
+      <a [routerLink]="['/register']">zarejestruj</a>.
+    </p>
+  </ng-template>
 </div>

@@ -68,6 +68,10 @@ export class ProductDetailsComponent implements OnInit {
     }, 2000);
   }
 
+  isAdmin() {
+    return this.authService.isAdmin();
+  }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
