@@ -31,7 +31,7 @@
     </h3>
     <div>
       <p>Left: {{quantity > 0 ? quantity : 'Out of stock'}}</p>
-      <p><span class="fw-bold">Price: </span>{{price}} {{currency}}</p>
+      <p><span class="fw-bold">Price: </span>{{price | currency:currency}}</p>
     </div>
   </div>
   <div>
