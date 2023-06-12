@@ -20,6 +20,7 @@ import {LogoutComponent} from './components/logout/logout.component';
 import {InvalidFormDirective} from './directives/invalid-form.directive';
 import {ProductDetailsComponent} from './components/product-details/product-details.component';
 import {AddProductComponent} from './components/add-product/add-product.component';
+import {EditProductComponent} from './components/edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {AddProductComponent} from './components/add-product/add-product.componen
     InvalidFormDirective,
     ProductDetailsComponent,
     AddProductComponent,
+    EditProductComponent,
   ],
   imports: [
     BrowserModule,

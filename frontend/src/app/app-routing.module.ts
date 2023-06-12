@@ -9,6 +9,7 @@ import {canActivate} from "./services/auth.guard";
 import {ProductDetailsComponent} from "./components/product-details/product-details.component";
 import {AddProductComponent} from "./components/add-product/add-product.component";
 import {canAdminActivate} from "./services/admin-auth.guard";
+import {EditProductComponent} from "./components/edit-product/edit-product.component";
 
 const routes: Routes = [
   {
@@ -26,6 +27,11 @@ const routes: Routes = [
   {
     path: 'products/add',
     component: AddProductComponent,
+    canActivate: [canAdminActivate]
+  },
+  {
+    path: 'products/edit/:productId',
+    component: EditProductComponent,
     canActivate: [canAdminActivate]
   },
   {

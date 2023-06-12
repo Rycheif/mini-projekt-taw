@@ -3,6 +3,7 @@ import {ProductService} from "../../services/product.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {IProduct} from "../../models/Product";
 
 @Component({
   selector: 'product-details',
@@ -10,14 +11,10 @@ import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ['./product-details.component.css']
 })
 export class ProductDetailsComponent implements OnInit {
-  id: string = '0';
-  manufacturer: string = 'Acme Corporation';
-  productName: string = 'Anvil';
-  price: number = 0;
-  quantity: number = 0;
-  currency?: string = 'USD';
-  image: string = 'assets/placeholder.png';
-  description: string = 'No description';
+
+  private id: string = '0';
+
+  product: IProduct;
 
   closeResult = '';
   showSpinner: boolean = false;
@@ -28,19 +25,22 @@ export class ProductDetailsComponent implements OnInit {
     private activatedRouter: ActivatedRoute,
     private router: Router,
     private modalService: NgbModal) {
+    this.product = {
+      manufacturer: 'Acme',
+      image: 'assets/placeholder.png',
+      currency: 'USD',
+      price: 0,
+      description: 'No description',
+      name: 'Anvil',
+      quantity: 0
+    };
   }
 
   ngOnInit(): void {
     this.getIdFromUrl()
     this.productService.getProductById(this.id)
       .subscribe(result => {
-        this.manufacturer = result.manufacturer ?? this.manufacturer;
-        this.productName = result.name ?? this.productName;
-        this.price = result.price ?? this.price;
-        this.quantity = result.quantity ?? this.quantity;
-        this.currency = result.currency ?? this.currency;
-        this.image = result.image ?? this.image;
-        this.description = result.description ?? this.description;
+        this.product = result;
       });
   }
 
@@ -58,6 +58,10 @@ export class ProductDetailsComponent implements OnInit {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         },
       );
+  }
+
+  editProduct() {
+    this.router.navigate(['/products/edit/' + this.id]);
   }
 
   closeModal(modal: any, reason: string) {

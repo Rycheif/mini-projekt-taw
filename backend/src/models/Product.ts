@@ -9,7 +9,7 @@ export const availableCurrency = {
 const availableCurrencies = [availableCurrency.pln, availableCurrency.usd, availableCurrency.eur];
 
 export interface IProduct {
-    id?: string;
+    _id?: string;
     manufacturer: string;
     name: string;
     image: string;

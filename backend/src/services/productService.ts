@@ -5,7 +5,7 @@ import Product, {IProduct} from "../models/Product";
 function createNewOrUpdate(product: IProduct) {
     return Promise.resolve()
         .then(() => {
-            if (!product.id) {
+            if (!product._id) {
                 return new Product(product).save()
                     .then(result => {
                         if (result) {
@@ -13,7 +13,7 @@ function createNewOrUpdate(product: IProduct) {
                         }
                     });
             } else {
-                return Product.findByIdAndUpdate(product.id, _.omit(product, 'id'), {new: true});
+                return Product.findByIdAndUpdate(product._id, _.omit(product, 'id'), {new: true});
             }
         }).catch(error => {
             if ('ValidationError' === error.name) {

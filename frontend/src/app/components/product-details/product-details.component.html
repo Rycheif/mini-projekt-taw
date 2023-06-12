@@ -1,40 +1,44 @@
 <article class="d-flex flex-column align-content-center">
   <div class="d-flex justify-content-end mb-5" *ngIf="isAdmin()">
-    <button type="button" class="btn btn-primary mx-1">Update</button>
-    <button type="button" class="btn btn-danger mx-1" (click)="openDeleteModal(content)">Delete</button>
-    <ng-template #content let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Delete product: {{productName}}</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-      </div>
-      <div class="modal-body">
-        <p>Are you sure you want to delete this product?</p>
-        <div class="d-flex justify-content-center" *ngIf="showSpinner">
-          <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Cancel</button>
-        <button type="button" class="btn btn-danger" (click)="closeModal(modal, 'Ok click')">Ok</button>
-      </div>
-    </ng-template>
+    <button type="button" class="btn btn-primary mx-1">Restock</button>
+    <button type="button" class="btn btn-primary mx-1" (click)="editProduct()">Update</button>
+    <button type="button" class="btn btn-danger mx-1" (click)="openDeleteModal(contentDeleteModal)">Delete</button>
   </div>
   <figure class="d-flex justify-content-center">
-    <img [src]="image" width="600" height="400" class="img-fluid" alt="Product image">
+    <img [src]="product.image" width="600" height="400" class="img-fluid" alt="Product image">
   </figure>
   <div class="d-flex justify-content-around">
     <h3>
-      {{manufacturer}}
-      <small class="text-body-secondary">{{productName}}</small>
+      {{product.manufacturer}}
+      <small class="text-body-secondary">{{product.name}}</small>
     </h3>
     <div>
-      <p>Left: {{quantity > 0 ? quantity : 'Out of stock'}}</p>
-      <p><span class="fw-bold">Price: </span>{{price | currency:currency}}</p>
+      <p>Left: {{product.quantity > 0 ? product.quantity : 'Out of stock'}}</p>
+      <p><span class="fw-bold">Price: </span>{{product.price | currency:product.currency}}</p>
     </div>
   </div>
   <div>
-    <p class="text-center">{{description}}</p>
+    <p class="text-center">{{product.description}}</p>
   </div>
 </article>
+
+<ng-template #contentDeleteModal let-deleteModal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Delete product: {{product.name}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="deleteModal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete this product</p>
+    <div class="d-flex justify-content-center" *ngIf="showSpinner">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="deleteModal.dismiss('cancel click')">Cancel</button>
+    <button type="button" class="btn btn-danger" (click)="closeModal(deleteModal, 'Ok click')">Ok</button>
+  </div>
+</ng-template>
+
+
