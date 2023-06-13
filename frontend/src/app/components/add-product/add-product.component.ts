@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {ProductService} from "../../services/product.service";
 import {IProduct} from "../../models/Product";
@@ -11,33 +10,19 @@ import {IProduct} from "../../models/Product";
 })
 export class AddProductComponent {
 
-  createProductForm: FormGroup;
-  currencies: string[] = ['PLN', 'EUR', 'USD'];
+  showSpinner: boolean = false;
 
   constructor(
     private productService: ProductService,
-    private router: Router,
-    private formBuilder: FormBuilder) {
-
-    this.createProductForm = this.formBuilder.group({
-      manufacturer: new FormControl('', Validators.required),
-      name: new FormControl('', Validators.required),
-      image: new FormControl('', Validators.required),
-      price: new FormControl('', Validators.required),
-      currency: new FormControl(this.currencies[2], Validators.required),
-      description: new FormControl('', Validators.required),
-    });
+    private router: Router) {
   }
 
-  createOrUpdate(data: IProduct) {
-    this.productService.createNewOrUpdate(data);
-    this.createProductForm.reset();
-    this.router.navigate(['/']);
+  addProduct(data: IProduct) {
+    this.showSpinner = true;
+    setTimeout(() => {
+      this.productService.createNewOrUpdate(data);
+      this.router.navigate(['/products'], {queryParams: {page: 1, limit: 20}});
+    }, 2000);
   }
 
-  changeCurrency($event: any) {
-    this.createProductForm.get('currency')?.setValue($event.target?.value, {
-      onlySelf: true,
-    });
-  }
 }

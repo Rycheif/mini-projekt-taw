@@ -1,11 +1,11 @@
 <article class="d-flex flex-column align-content-center">
   <div class="d-flex justify-content-end mb-5" *ngIf="isAdmin()">
     <button type="button" class="btn btn-primary mx-1">Restock</button>
-    <button type="button" class="btn btn-primary mx-1" (click)="editProduct()">Update</button>
+    <button type="button" class="btn btn-primary mx-1" (click)="openEditModal(contentEditModal)">Update</button>
     <button type="button" class="btn btn-danger mx-1" (click)="openDeleteModal(contentDeleteModal)">Delete</button>
   </div>
   <figure class="d-flex justify-content-center">
-    <img [src]="product.image" width="600" height="400" class="img-fluid" alt="Product image">
+    <img [src]="product.image" width="600" height="400" class="img-fluid rounded" alt="Product image">
   </figure>
   <div class="d-flex justify-content-around">
     <h3>
@@ -24,7 +24,7 @@
 
 <ng-template #contentDeleteModal let-deleteModal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Delete product: {{product.name}}</h4>
+    <h4 class="modal-title" id="delete-modal-basic-title">Delete product: {{product.name}}</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="deleteModal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
@@ -36,9 +36,23 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" (click)="deleteModal.dismiss('cancel click')">Cancel</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="deleteModal.dismiss('cancel click')">Cancel
+    </button>
     <button type="button" class="btn btn-danger" (click)="closeModal(deleteModal, 'Ok click')">Ok</button>
   </div>
 </ng-template>
 
-
+<ng-template #contentEditModal let-editModal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="edit-modal-basic-title">Delete product: {{product.name}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="editModal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <manage-product-form (onSubmit)="editProduct($event, editModal)" [initialData]="product"></manage-product-form>
+    <div class="d-flex justify-content-center" *ngIf="showSpinner">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+</ng-template>

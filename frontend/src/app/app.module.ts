@@ -21,6 +21,7 @@ import {InvalidFormDirective} from './directives/invalid-form.directive';
 import {ProductDetailsComponent} from './components/product-details/product-details.component';
 import {AddProductComponent} from './components/add-product/add-product.component';
 import {EditProductComponent} from './components/edit-product/edit-product.component';
+import {ManageProductFormComponent} from './components/manage-product-form/manage-product-form.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import {EditProductComponent} from './components/edit-product/edit-product.compo
     ProductDetailsComponent,
     AddProductComponent,
     EditProductComponent,
+    ManageProductFormComponent,
   ],
   imports: [
     BrowserModule,

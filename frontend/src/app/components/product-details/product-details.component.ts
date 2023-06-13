@@ -15,6 +15,7 @@ export class ProductDetailsComponent implements OnInit {
   private id: string = '0';
 
   product: IProduct;
+  editedProduct?: IProduct;
 
   closeResult = '';
   showSpinner: boolean = false;
@@ -45,7 +46,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   openDeleteModal(content: any) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'})
+    this.modalService.open(content, {ariaLabelledBy: 'delete-modal-basic-title'})
       .result
       .then(
         (result) => {
@@ -56,12 +57,23 @@ export class ProductDetailsComponent implements OnInit {
         },
         (reason) => {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        },
-      );
+        });
   }
 
-  editProduct() {
-    this.router.navigate(['/products/edit/' + this.id]);
+  openEditModal(content: any) {
+    this.modalService.open(content, {ariaLabelledBy: 'edit-modal-basic-title'})
+      .result
+      .then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+          if (this.editedProduct) {
+            this.productService.createNewOrUpdate(this.editedProduct);
+            this.router.navigate(['/products'], {queryParams: {page: 1, limit: 20}})
+          }
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        });
   }
 
   closeModal(modal: any, reason: string) {
@@ -74,6 +86,12 @@ export class ProductDetailsComponent implements OnInit {
 
   isAdmin() {
     return this.authService.isAdmin();
+  }
+
+  editProduct(data: IProduct, modal: any) {
+    data._id = this.id;
+    this.editedProduct = data;
+    this.closeModal(modal, 'Form submitted');
   }
 
   private getDismissReason(reason: any): string {
