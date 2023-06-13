@@ -68,12 +68,17 @@ export class ProductDetailsComponent implements OnInit {
           this.closeResult = `Closed with: ${result}`;
           if (this.editedProduct) {
             this.productService.createNewOrUpdate(this.editedProduct);
-            this.router.navigate(['/products'], {queryParams: {page: 1, limit: 20}})
+            this.router.navigate(['/products'], {queryParams: {page: 1, limit: 20}});
+            this.editedProduct = undefined;
           }
         },
         (reason) => {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
         });
+  }
+
+  openRestockModal(content: any) {
+    this.openEditModal(content);
   }
 
   closeModal(modal: any, reason: string) {
@@ -91,6 +96,15 @@ export class ProductDetailsComponent implements OnInit {
   editProduct(data: IProduct, modal: any) {
     data._id = this.id;
     this.editedProduct = data;
+    this.closeModal(modal, 'Form submitted');
+  }
+
+  restockProduct(data: any, modal: any) {
+    this.productService.getProductById(this.id)
+      .subscribe(value => {
+        value.quantity = data.quantity;
+        this.editedProduct = value;
+      });
     this.closeModal(modal, 'Form submitted');
   }
 

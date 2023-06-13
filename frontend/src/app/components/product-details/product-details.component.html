@@ -1,6 +1,6 @@
 <article class="d-flex flex-column align-content-center">
   <div class="d-flex justify-content-end mb-5" *ngIf="isAdmin()">
-    <button type="button" class="btn btn-primary mx-1">Restock</button>
+    <button type="button" class="btn btn-primary mx-1" (click)="openRestockModal(contentRestockModal)">Restock</button>
     <button type="button" class="btn btn-primary mx-1" (click)="openEditModal(contentEditModal)">Update</button>
     <button type="button" class="btn btn-danger mx-1" (click)="openDeleteModal(contentDeleteModal)">Delete</button>
   </div>
@@ -44,7 +44,7 @@
 
 <ng-template #contentEditModal let-editModal>
   <div class="modal-header">
-    <h4 class="modal-title" id="edit-modal-basic-title">Delete product: {{product.name}}</h4>
+    <h4 class="modal-title" id="edit-modal-basic-title">Edit product: {{product.name}}</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="editModal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
@@ -56,3 +56,19 @@
     </div>
   </div>
 </ng-template>
+
+<ng-template #contentRestockModal let-restockModal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="restock-modal-basic-title">Restock product: {{product.name}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="restockModal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <restock-product-form (onSubmit)="restockProduct($event, restockModal)" [stock]="product.quantity"></restock-product-form>
+    <div class="d-flex justify-content-center" *ngIf="showSpinner">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+</ng-template>
+

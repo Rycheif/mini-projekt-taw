@@ -20,8 +20,8 @@ import {LogoutComponent} from './components/logout/logout.component';
 import {InvalidFormDirective} from './directives/invalid-form.directive';
 import {ProductDetailsComponent} from './components/product-details/product-details.component';
 import {AddProductComponent} from './components/add-product/add-product.component';
-import {EditProductComponent} from './components/edit-product/edit-product.component';
 import {ManageProductFormComponent} from './components/manage-product-form/manage-product-form.component';
+import {RestockProductFormComponent} from './components/restock-product-form/restock-product-form.component';
 
 @NgModule({
   declarations: [
@@ -39,8 +39,8 @@ import {ManageProductFormComponent} from './components/manage-product-form/manag
     InvalidFormDirective,
     ProductDetailsComponent,
     AddProductComponent,
-    EditProductComponent,
     ManageProductFormComponent,
+    RestockProductFormComponent,
   ],
   imports: [
     BrowserModule,
