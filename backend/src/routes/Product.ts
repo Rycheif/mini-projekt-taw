@@ -18,6 +18,16 @@ router.post("/", admin, async (req, res, next) => {
     }
 });
 
+router.get('/products-with-productIds', async (req, res, next) => {
+    try {
+        const productIds = req.body.productIds;
+        const result = await productService.getProductsWithIds(productIds);
+        res.status(200).json(result);
+    } catch (e) {
+        applicationException.errorHandler(e, res);
+    }
+});
+
 router.get("/:productId", async (req, res, next) => {
     try {
         const id = req.params.productId;

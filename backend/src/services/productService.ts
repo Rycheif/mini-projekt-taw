@@ -68,11 +68,23 @@ function removeById(id: string) {
     return Product.deleteOne({_id: id});
 }
 
+async function getProductsWithIds(ids: string[]) {
+    if (null === ids || ids.length === 0) {
+        throw applicationException.new(applicationException.BAD_REQUEST.code, 'Id array was null or empty');
+    }
+    const result = await Product.find({_id : {$in: ids}});
+    if (result) {
+        return result;
+    }
+    throw applicationException.new(applicationException.NOT_FOUND.code, 'Products not found');
+}
+
 export default {
     createNewOrUpdate,
     getByName,
     getByManufacturer,
     getById,
     getPage,
-    removeById
+    removeById,
+    getProductsWithIds
 }
