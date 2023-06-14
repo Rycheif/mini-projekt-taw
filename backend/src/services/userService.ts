@@ -6,6 +6,8 @@ import passwordService from "./passwordService";
 import {IToken} from "../models/Token";
 import sha1 from 'sha1';
 import tokenService from "./tokenService";
+import productService from "./productService";
+import {IBasket} from "../models/Basket";
 
 export interface ICreateOrUpdateUser {
     id?: number;
@@ -18,6 +20,17 @@ export interface ICreateOrUpdateUser {
 export interface IAuthUser {
     loginOrEmail: string;
     password: string;
+}
+
+export interface AddProductToBasketRequest {
+    userId: string;
+    productId: string;
+    quantity: number;
+}
+
+export interface RemoveProductFromBasketRequest {
+    userId: string;
+    productId: string;
 }
 
 async function createNewOrUpdate(userData: ICreateOrUpdateUser) {
@@ -134,8 +147,40 @@ async function removeHashSession(userId: string) {
 }
 
 async function isUserAdmin(userId: string) {
-    const result = await User.findOne({isAdmin: true});
+    const result = await User.findOne({$and: [{isAdmin: true}, {_id: userId}]});
     return !!result;
+}
+
+async function addProductToUsersBasket(request: AddProductToBasketRequest) {
+    const user = await getById(request.userId);
+    const product = await productService.getById(request.productId);
+    if (!user || !product) {
+        throw applicationException.new(applicationException.NOT_FOUND.code, 'User or product with given id dont exist');
+    }
+    const payload: IBasket = {
+        productId: request.productId,
+        quantity: request.quantity
+    };
+    user.products.push(payload);
+    return await User.findByIdAndUpdate(user.id, _.omit(user, 'id'), {new: true});
+}
+
+async function removeProductFromBasket(request: RemoveProductFromBasketRequest) {
+    const user = await getById(request.userId);
+    if (!user) {
+        throw applicationException.new(applicationException.NOT_FOUND.code, 'User or product with given id dont exist');
+    }
+    user.products = user.products.filter(value => value.productId !== request.productId);
+    return await User.findByIdAndUpdate(user.id, _.omit(user, 'id'), {new: true});
+}
+
+async function clearUsersBasket(userId: string) {
+    const user = await getById(userId);
+    if (!user) {
+        throw applicationException.new(applicationException.NOT_FOUND.code, 'User or product with given id dont exist');
+    }
+    user.products = [];
+    await User.findByIdAndUpdate(user.id, _.omit(user, 'id'), {new: true});
 }
 
 export default {
@@ -145,5 +190,8 @@ export default {
     removeById,
     authenticate,
     removeHashSession,
-    isUserAdmin
+    isUserAdmin,
+    addProductToUsersBasket,
+    removeProductFromBasket,
+    clearUsersBasket
 };
