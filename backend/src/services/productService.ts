@@ -1,6 +1,7 @@
 import * as _ from "lodash";
 import applicationException from "../../util/applicationException";
 import Product, {IProduct} from "../models/Product";
+import userService from "./userService";
 
 function createNewOrUpdate(product: IProduct) {
     return Promise.resolve()
@@ -68,11 +69,14 @@ function removeById(id: string) {
     return Product.deleteOne({_id: id});
 }
 
-async function getProductsWithIds(ids: string[]) {
-    if (null === ids || ids.length === 0) {
-        throw applicationException.new(applicationException.BAD_REQUEST.code, 'Id array was null or empty');
+async function getProductsFromBasket(userId: string) {
+    if (null === userId || userId.length === 0) {
+        throw applicationException.new(applicationException.BAD_REQUEST.code, 'User id is null or empty');
     }
-    const result = await Product.find({_id : {$in: ids}});
+
+    const user = await userService.getById(userId);
+    const ids = user.products.map(value => value.productId);
+    const result = await Product.find({_id: {$in: ids}});
     if (result) {
         return result;
     }
@@ -86,5 +90,5 @@ export default {
     getById,
     getPage,
     removeById,
-    getProductsWithIds
+    getProductsFromBasket
 }

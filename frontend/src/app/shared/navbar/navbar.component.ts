@@ -10,7 +10,17 @@ export class NavbarComponent {
 
   isMenuCollapsed = true;
 
+  basketSize: number = 0;
+
   constructor(private authService: AuthService) {
+    this.authService.currentUser
+      .subscribe(value => {
+        if (value) {
+          this.basketSize = value.products.length;
+          return;
+        }
+        this.basketSize = 0;
+      });
   }
 
   isUserLoggedIn() {

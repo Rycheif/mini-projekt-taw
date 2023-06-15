@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {JwtHelperService} from "@auth0/angular-jwt";
-import {IAuthUser, ICreateOrUpdateUser} from "../models/User";
+import {IAuthUser, ICreateOrUpdateUser, IUser} from "../models/User";
 import {config} from "../config/config";
 import {DecodedToken, Token} from "../models/Token";
 import {map} from "rxjs";
@@ -57,7 +57,7 @@ export class AuthService {
     if (!token) {
       return;
     }
-    return this.http.delete(config.baseUrl + config.user + "/logout/" + this.currentUser, {
+    return this.http.delete(config.baseUrl + config.user + "/logout/" + this.currentUserId, {
       headers: new HttpHeaders({
         'Authorization': token
       })
@@ -67,7 +67,7 @@ export class AuthService {
     });
   }
 
-  get currentUser() {
+  get currentUserId() {
     const token = this.getToken();
     if (!token) {
       return null;
@@ -77,6 +77,10 @@ export class AuthService {
 
   getToken() {
     return localStorage.getItem('token');
+  }
+
+  get currentUser() {
+    return this.http.get<IUser>(config.baseUrl + config.user + "/" + this.currentUserId);
   }
 
 }

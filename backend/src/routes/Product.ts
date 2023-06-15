@@ -18,10 +18,10 @@ router.post("/", admin, async (req, res, next) => {
     }
 });
 
-router.get('/products-with-productIds', async (req, res, next) => {
+router.get('/products-from-basket/:userId', async (req, res, next) => {
     try {
-        const productIds = req.body.productIds;
-        const result = await productService.getProductsWithIds(productIds);
+        const userId = req.params.userId;
+        const result = await productService.getProductsFromBasket(userId);
         res.status(200).json(result);
     } catch (e) {
         applicationException.errorHandler(e, res);
@@ -70,7 +70,6 @@ router.delete("/delete/:productId", admin, async (req, res, next) => {
         applicationException.errorHandler(e, res);
     }
 });
-
 
 
 export default router;

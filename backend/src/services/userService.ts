@@ -8,7 +8,7 @@ import sha1 from 'sha1';
 import tokenService from "./tokenService";
 import productService from "./productService";
 import {IBasket} from "../models/Basket";
-
+import {Types} from "mongoose";
 export interface ICreateOrUpdateUser {
     id?: number;
     email: string;
@@ -161,7 +161,17 @@ async function addProductToUsersBasket(request: AddProductToBasketRequest) {
         productId: request.productId,
         quantity: request.quantity
     };
-    user.products.push(payload);
+
+    if (user.products.find(value => new Types.ObjectId(value.productId).equals(new Types.ObjectId(request.productId)))) {
+        user.products.forEach(value => {
+            if (new Types.ObjectId(value.productId).equals(new Types.ObjectId(request.productId))) {
+                value.quantity += request.quantity;
+            }
+        });
+    } else {
+        user.products.push(payload);
+    }
+
     return await User.findByIdAndUpdate(user.id, _.omit(user, 'id'), {new: true});
 }
 

@@ -12,7 +12,8 @@ export class ProductService {
   constructor(private http: HttpClient, private authService: AuthService) {
   }
 
-  createNewOrUpdate(data: IProduct) {const token = this.authService.getToken();
+  createNewOrUpdate(data: IProduct) {
+    const token = this.authService.getToken();
     if (!token) {
       return;
     }
@@ -37,6 +38,10 @@ export class ProductService {
 
   getPageOfProducts(page: number, limit: number) {
     return this.http.get<IProductPage>(config.baseUrl + config.products + `?page=${page}&limit=${limit}`);
+  }
+
+  getProductsFromBasket() {
+    return this.http.get<IProduct[]>(config.baseUrl + config.products + `/products-from-basket/` + this.authService.currentUserId);
   }
 
   deleteProduct(productId: string) {

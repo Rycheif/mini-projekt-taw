@@ -1,0 +1,38 @@
+<section>
+  <h1 class="entry-title"><span>Basket</span></h1>
+  <hr>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Photo</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let product of basket; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>
+        <img
+          [src]="product.image"
+          class="img-thumbnail"
+          style="width: 200px"
+          alt="Product photo"/>
+      </td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.price | currency:product.currency }}</td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-end" (click)="buy()">
+    <button type="button" class="btn btn-primary" [disabled]="basket.length === 0">
+      Buy
+    </button>
+    <div class="d-flex justify-content-center" *ngIf="showSpinner">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </div>
+</section>

@@ -21,6 +21,9 @@
           <div *ngIf="isUserLoggedIn(); then thenBlock else elseBlock"></div>
           <ng-template #thenBlock>
             <li class="nav-item">
+              <a class="nav-link" [routerLink]="'/basket'" (click)="isMenuCollapsed = true">Basket({{basketSize}})</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" [routerLink]="'/logout'" (click)="isMenuCollapsed = true">Logout</a>
             </li>
           </ng-template>

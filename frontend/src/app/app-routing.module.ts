@@ -9,6 +9,7 @@ import {canActivate} from "./services/auth.guard";
 import {ProductDetailsComponent} from "./components/product-details/product-details.component";
 import {AddProductComponent} from "./components/add-product/add-product.component";
 import {canAdminActivate} from "./services/admin-auth.guard";
+import {BasketComponent} from "./components/basket/basket.component";
 
 const routes: Routes = [
   {
@@ -39,6 +40,11 @@ const routes: Routes = [
   {
     path: 'logout',
     component: LogoutComponent,
+    canActivate: [canActivate]
+  },
+  {
+    path: 'basket',
+    component: BasketComponent,
     canActivate: [canActivate]
   }
 ];

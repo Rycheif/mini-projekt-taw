@@ -22,6 +22,7 @@ import {ProductDetailsComponent} from './components/product-details/product-deta
 import {AddProductComponent} from './components/add-product/add-product.component';
 import {ManageProductFormComponent} from './components/manage-product-form/manage-product-form.component';
 import {RestockProductFormComponent} from './components/restock-product-form/restock-product-form.component';
+import {BasketComponent} from './components/basket/basket.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {RestockProductFormComponent} from './components/restock-product-form/res
     AddProductComponent,
     ManageProductFormComponent,
     RestockProductFormComponent,
+    BasketComponent,
   ],
   imports: [
     BrowserModule,
